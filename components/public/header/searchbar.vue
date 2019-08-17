@@ -29,7 +29,7 @@
           <dl
             v-if="isSearchList"
             class="searchList">
-            <dd v-for="(item,index) of searchList" :key="index">{{item}}</dd>
+            <dd v-for="(item,index) of searchList" :key="index">{{item.name}}</dd>
           </dl>
         </div>
         <p class="suggest">
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 
 export default {
   data(){
@@ -100,9 +101,18 @@ export default {
         self.isFocus=false
       },200)
     },
-    input:function () {
-      console.log('input')
-    }
+    input:_.debounce(async function(){
+      let self=this;
+      let city=self.$store.state.geo.position.city.replace('市','')
+      self.searchList=[]
+      let {status,data:{top}}=await self.$axios.get('/search/top',{
+        params:{
+          input:self.search,
+          city
+        }
+      })
+      self.searchList=top.slice(0,10)
+    },300)
   }
 }
 </script>

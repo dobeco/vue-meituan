@@ -1,7 +1,9 @@
 import Router from 'koa-router';
 import axios from './utils/axios'
 import Poi from '../dbs/models/poi'
-// import sign from './utils/sign'
+
+import Config from '../dbs/config';
+const sign = Config.sign
 
 let router = new Router({prefix: '/search'})
 
@@ -27,9 +29,7 @@ router.get('/top', async (ctx) => {
   //     top: []
   //   }
   // }
-  let {status, data: {
-      top
-    }} = await axios.get(`http://cp-tools.cn/search/top`, {
+  let { status, data: {top} } = await axios.get(`http://cp-tools.cn/search/top`, {
     params: {
       input: ctx.query.input,
       city: ctx.query.city,

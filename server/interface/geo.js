@@ -2,9 +2,10 @@ import Router from 'koa-router';
 import axios from './utils/axios'
 import Province from '../dbs/models/province'
 
-let router = new Router({prefix: '/geo'})
+let router = new Router({ prefix: '/geo' })
 
-const sign = 'a3c9fe0782107295ee9f1709edd15218';
+import Config from '../dbs/config';
+const sign = Config.sign
 
 router.get('/getPosition', async (ctx) => {
   let {
@@ -37,9 +38,9 @@ router.get('/province', async (ctx) => {
   //     }
   //   })
   // }
-  let {status, data: {
-      province
-    }} = await axios.get(`http://cp-tools.cn/geo/province?sign=${sign}`)
+  let { status, data: {
+    province
+  } } = await axios.get(`http://cp-tools.cn/geo/province?sign=${sign}`)
   ctx.body = {
     province: status === 200
       ? province
@@ -56,9 +57,9 @@ router.get('/province/:id', async (ctx) => {
   //     return {province: item.province, id: item.id, name: item.name}
   //   })
   // }
-  let {status, data: {
-      city
-    }} = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}?sign=${sign}`)
+  let { status, data: {
+    city
+  } } = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}?sign=${sign}`)
   if (status === 200) {
     ctx.body = {
       city
@@ -88,9 +89,7 @@ router.get('/city', async (ctx) => {
   //     }
   //   })
   // }
-  let {status, data: {
-      city
-    }} = await axios.get(`http://cp-tools.cn/geo/city?sign=${sign}`);
+  let { status, data: {city} } = await axios.get(`http://cp-tools.cn/geo/city?sign=${sign}`);
   if (status === 200) {
     ctx.body = {
       city
@@ -123,9 +122,9 @@ router.get('/hotCity', async (ctx) => {
   // ctx.body = {
   //   hots: nList
   // }
-  let {status, data: {
-      hots
-    }} = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`);
+  let { status, data: {
+    hots
+  } } = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`);
   if (status === 200) {
     ctx.body = {
       hots
@@ -142,9 +141,9 @@ router.get('/menu', async (ctx) => {
   // ctx.body = {
   //   menu: result.menu
   // }
-  let {status, data: {
-      menu
-    }} = await axios.get(`http://cp-tools.cn/geo/menu?sign=${sign}`);
+  let { status, data: {
+    menu
+  } } = await axios.get(`http://cp-tools.cn/geo/menu?sign=${sign}`);
   if (status === 200) {
     ctx.body = {
       menu
