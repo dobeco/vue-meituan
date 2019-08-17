@@ -3,7 +3,7 @@
     <dl class="nav" @mouseleave="mouseleave">
       <dt>全部分类</dt>
       <dd
-        v-for="(item,index) of menu"
+        v-for="(item,index) of this.$store.state.home.menu"
         :key="index"
         @mouseenter="enter"
       >
@@ -60,7 +60,7 @@
 
     computed: {
       curdetail: function () {
-        return this.menu.filter(item => item.type === this.kind)[0]
+        return this.$store.state.home.menu.filter(item => item.type === this.kind)[0]
       }
     },
     methods: {
