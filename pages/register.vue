@@ -22,13 +22,11 @@
         :rules="rules"
         label-width="100px"
         class="demo-ruleForm">
-        <!--        昵称-->
         <el-form-item
           label="昵称"
           prop="name">
           <el-input v-model="ruleForm.name"/>
         </el-form-item>
-        <!--        邮箱-->
         <el-form-item
           label="邮箱"
           prop="email">
@@ -40,7 +38,6 @@
           </el-button>
           <span class="status">{{ statusMsg }}</span>
         </el-form-item>
-        <!--验证码 -->
         <el-form-item
           label="验证码"
           prop="code">
@@ -48,7 +45,6 @@
             v-model="ruleForm.code"
             maxlength="4"/>
         </el-form-item>
-        <!--        密码-->
         <el-form-item
           label="密码"
           prop="pwd">
@@ -56,7 +52,6 @@
             v-model="ruleForm.pwd"
             type="password"/>
         </el-form-item>
-        <!--确认密码-->
         <el-form-item
           label="确认密码"
           prop="cpwd">
@@ -64,7 +59,6 @@
             v-model="ruleForm.cpwd"
             type="password"/>
         </el-form-item>
-        <!--同意注册-->
         <el-form-item>
           <el-button
             type="primary"
@@ -72,7 +66,6 @@
           </el-button>
           <div class="error">{{ error }}</div>
         </el-form-item>
-
         <el-form-item>
           <a
             class="f1"
@@ -85,8 +78,9 @@
 </template>
 
 <script>
+  import CryptoJS from 'crypto-js'
+
   export default {
-    layout: 'blank',
     data() {
       return {
         statusMsg: '',
@@ -135,13 +129,76 @@
         }
       }
     },
-
+    layout: 'blank',
     methods: {
-      sendMsg() {
+      sendMsg: function () {
+        const self = this;
+        let namePass
+        let emailPass
+        if (self.timerid) {
+          return false
+        }
+        this.$refs['ruleForm'].validateField('name', (valid) => {
+          namePass = valid
+        })
+        self.statusMsg = ''
+        if (namePass) {
+          return false
+        }
+        this.$refs['ruleForm'].validateField('email', (valid) => {
+          emailPass = valid
+        })
+        if (!namePass && !emailPass) {
+          self.$axios.post('/users/verify', {
+            username: encodeURIComponent(self.ruleForm.name),
+            email: self.ruleForm.email
+          }).then(({
+                     status,
+                     data
+                   }) => {
+            if (status === 200 && data && data.code === 0) {
+              let count = 60;
+              self.statusMsg = `验证码已发送,剩余${count--}秒`
+              self.timerid = setInterval(function () {
+                self.statusMsg = `验证码已发送,剩余${count--}秒`
+                if (count === 0) {
+                  clearInterval(self.timerid)
+                }
+              }, 1000)
+            } else {
+              self.statusMsg = data.msg
+            }
+          })
+        }
       },
-
-
-      register() {
+      register: function () {
+        let self = this;
+        this.$refs['ruleForm'].validate((valid) => {
+          if (valid) {
+            self.$axios.post('/users/signup', {
+              username: window.encodeURIComponent(self.ruleForm.name),
+              password: CryptoJS.MD5(self.ruleForm.pwd).toString(),
+              email: self.ruleForm.email,
+              code: self.ruleForm.code
+            }).then(({
+                       status,
+                       data
+                     }) => {
+              if (status === 200) {
+                if (data && data.code === 0) {
+                  location.href = '/login'
+                } else {
+                  self.error = data.msg
+                }
+              } else {
+                self.error = `服务器出错，错误码:${status}`
+              }
+              setTimeout(function () {
+                self.error = ''
+              }, 1500)
+            })
+          }
+        })
       }
     }
   }
