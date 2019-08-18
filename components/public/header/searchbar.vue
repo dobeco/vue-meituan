@@ -82,8 +82,8 @@ export default {
     return {
       search: '',
       isFocus: false,
-      hotPlace: ['故宫', '故宫', '故宫', '故宫', '故宫'],
-      searchList: ['火锅', '火锅', '火锅', '火锅', '火锅',]
+      hotPlace: [],
+      searchList: []
     }
   },
   computed: {
@@ -104,7 +104,7 @@ export default {
         self.isFocus = false
       }, 200)
     },
-    input: _.debounce(async () => {
+    input: _.debounce(async function() {
       let self = this;
       let city = self.$store.state.geo.position.city.replace('市', '')
       self.searchList = []

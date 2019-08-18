@@ -36,6 +36,7 @@ export default {
     }
   },
   methods: {
+    // 创建购物车
     async createCart() {
       let self = this;
       let {

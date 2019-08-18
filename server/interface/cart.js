@@ -44,9 +44,7 @@ router.post('/getCart', async ctx => {
     let result = await Cart.findOne({ cartNo: id })
     ctx.body = {
       code: 0,
-      data: result
-        ? result.detail[0]
-        : {}
+      data: result? result.detail[0] : {}
     }
   } catch (e) {
     ctx.body = {
