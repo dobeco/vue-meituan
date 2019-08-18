@@ -25,6 +25,7 @@
 <script>
 import List from '@/components/cart/list.vue'
 export default {
+
   components:{
     List
   },
