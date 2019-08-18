@@ -13,13 +13,14 @@
 <script>
 import Item from './item.vue'
 export default {
+  name: 'detail-list',
   components: {
     Item
   },
   props: {
     list: {
-      type:Array,
-      default:()=>{
+      type: Array,
+      default: () => {
         return []
       }
     }

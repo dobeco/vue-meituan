@@ -9,10 +9,7 @@
       >{{ item.txt }}</dd>
     </dl>
     <ul>
-      <Item
-        v-for="(item,index) in list"
-        :key="index"
-        :meta="item"/>
+      <Item v-for="(item,index) in list" :key="index" :meta="item" />
     </ul>
   </div>
 </template>
@@ -20,13 +17,14 @@
 <script>
 import Item from './product.vue'
 export default {
+  name: 'products-list',
   components: {
     Item
   },
   props: {
     list: {
-      type:Array,
-      default(){
+      type: Array,
+      default() {
         return []
       }
     }
@@ -54,12 +52,13 @@ export default {
       ]
     }
   },
-  async asyncData({app}) {
-    let { data } = await app.$axios.get('searchList')
+  async asyncData({ app }) {
+    let data  = await app.$axios.get('/searchList')
+    console.log(data)
     return { items: data.list }
   },
   methods: {
-    navSelect: function () {
+    navSelect() {
       console.log('select')
     }
   }

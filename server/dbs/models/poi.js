@@ -7,35 +7,35 @@ const Poi = new Schema({
   province: {
     type: String
   },
-  city:{
-    type:String
+  city: {
+    type: String
   },
-  county:{
-    type:String
+  county: {
+    type: String
   },
-  areaCode:{
-    type:String
+  areaCode: {
+    type: String
   },
-  tel:{
-    type:String
+  tel: {
+    type: String
   },
-  area:{
-    type:String
+  area: {
+    type: String
   },
-  addr:{
-    type:String
+  addr: {
+    type: String
   },
-  type:{
-    type:String
+  type: {
+    type: String
   },
-  module:{
-    type:String
+  module: {
+    type: String
   },
-  longitude:{
-    type:Number
+  longitude: {
+    type: Number
   },
-  latitude:{
-    type:Number
+  latitude: {
+    type: Number
   }
 })
 

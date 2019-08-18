@@ -12,7 +12,7 @@
       </dd>
     </dl>
     <dl class="classic">
-      <dt>分类</dt>
+      <dt>区域</dt>
       <dt>全部</dt>
       <dd
         v-for="(item,index) in areas"
@@ -26,10 +26,11 @@
 </template>
 
 <script>
-import iselect from './iselect.vue'
+import Iselect from './iselect.vue'
 export default {
+  name: 'categroy',
   components: {
-    iselect
+    Iselect
   },
   props: {
     types: {

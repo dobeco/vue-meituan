@@ -8,9 +8,9 @@ const Categroy = new Schema({
     type: Array,
     require: true
   },
-  areas:{
-    type:Array,
-    require:true
+  areas: {
+    type: Array,
+    require: true
   }
 })
 

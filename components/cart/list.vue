@@ -32,6 +32,7 @@
 
 <script>
 export default {
+  name: 'cart-list',
   props:{
     cartData:{
       type:Array,

@@ -1,15 +1,13 @@
 <template>
-  <el-row
-    :gutter="0"
-    class="m-header">
+  <el-row :gutter="0" class="m-header">
     <el-col :span="5">
-      <geo/>
+      <geo />
     </el-col>
     <el-col :span="5">
-      <user/>
+      <user />
     </el-col>
     <el-col :span="14">
-      <navbar/>
+      <navbar />
     </el-col>
   </el-row>
 </template>
@@ -19,7 +17,8 @@ import Geo from './geo.vue'
 import User from './user.vue'
 import Navbar from './nav.vue'
 export default {
-  components:{
+  name: 'topbar',
+  components: {
     Geo,
     User,
     Navbar
@@ -28,6 +27,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/css/public/layout.scss";
-  @import "@/assets/css/public/header/index.scss";
+@import "@/assets/css/public/layout.scss";
+@import "@/assets/css/public/header/index.scss";
 </style>

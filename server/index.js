@@ -1,6 +1,6 @@
 import Koa from 'koa'
 const consola = require('consola')
-const {Nuxt, Builder} = require('nuxt')
+const { Nuxt, Builder } = require('nuxt')
 
 import mongoose from 'mongoose'
 import bodyParser from 'koa-bodyparser'
@@ -22,15 +22,15 @@ const port = process.env.PORT || 3000
 
 app.keys = ['mt', 'keyskeys']
 app.proxy = true
-app.use(session({key: 'mt', prefix: 'mt:uid', store: new Redis()}))
+app.use(session({ key: 'mt', prefix: 'mt:uid', store: new Redis() }))
 app.use(bodyParser({
-  extendTypes:['json','form','text']
+  extendTypes: ['json', 'form', 'text']
 }))
 app.use(json())
 app.use(cors());
 
-mongoose.connect(dbConfig.dbs,{
-  useNewUrlParser:true
+mongoose.connect(dbConfig.dbs, {
+  useNewUrlParser: true
 })
 app.use(passport.initialize())
 app.use(passport.session())
@@ -67,7 +67,7 @@ async function start() {
   })
 
   app.listen(port, host)
-  consola.ready({message: `Server listening on http://${host}:${port}`, badge: true})
+  consola.ready({ message: `Server listening on http://${host}:${port}`, badge: true })
 }
 
 start()

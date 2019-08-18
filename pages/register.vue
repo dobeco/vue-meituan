@@ -50,8 +50,8 @@
 
 <script>
 import CryptoJS from 'crypto-js'
-
 export default {
+  name: 'register',
   data() {
     return {
       statusMsg: '',
@@ -102,7 +102,7 @@ export default {
   },
   layout: 'blank',
   methods: {
-    sendMsg: function () {
+    sendMsg () {
       const self = this;
       let namePass
       let emailPass
@@ -142,7 +142,7 @@ export default {
         })
       }
     },
-    register: function () {
+    register () {
       let self = this;
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
@@ -174,7 +174,7 @@ export default {
                   type: 'error'
                 });
             }
-            setTimeout(function () {
+            setTimeout( () =>{
               self.error = ''
             }, 1500)
           })

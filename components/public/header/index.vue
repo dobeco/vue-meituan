@@ -2,12 +2,12 @@
   <div class="m-header">
     <el-row>
       <el-col>
-        <top-bar/>
+        <top-bar />
       </el-col>
     </el-row>
     <el-row>
       <el-col>
-        <search-bar/>
+        <search-bar />
       </el-col>
     </el-row>
   </div>
@@ -17,7 +17,8 @@
 import topBar from './topbar.vue'
 import searchBar from './searchbar.vue'
 export default {
-  components:{
+  name: 'index',
+  components: {
     topBar,
     searchBar
   }
@@ -25,5 +26,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/css/public/header/index.scss";
+@import "@/assets/css/public/header/index.scss";
 </style>

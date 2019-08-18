@@ -45,13 +45,14 @@ import Crumbs from '@/components/detail/crumbs.vue';
 import Summa from '@/components/detail/summary.vue'
 import List from '@/components/detail/list.vue'
 export default {
+  name: 'product-detail',
   components:{
     Crumbs,
     Summa,
     List
   },
   computed:{
-    canOrder:function(){
+    canOrder(){
       return this.list.filter(item=>item.photos.length).length
     }
   },

@@ -25,7 +25,7 @@
 <script>
 import List from '@/components/cart/list.vue'
 export default {
-
+  name: 'cart',
   components:{
     List
   },
@@ -44,7 +44,7 @@ export default {
     }
   },
   methods:{
-    submit: async function(){
+    async submit(){
       let {status,data:{code,id}}=await this.$axios.post('/order/createOrder',{
         count:this.cart[0].count,
         price:this.cart[0].price,

@@ -24,14 +24,11 @@ import Life from '@/components/index/life.vue'
 import Artistic from '@/components/index/artistic.vue'
 
 export default {
-  name: 'index',
-
+  name: 'home',
   components: {
     Emenu,
     Life,
     Artistic
-
-
   }
 }
 </script>
