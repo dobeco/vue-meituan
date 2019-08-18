@@ -7,9 +7,7 @@ const mutations = {
 }
 
 const actions = {
-  setPosition: ({
-    commit
-  }, position) => {
+  setPosition: ({commit}, position) => {
     commit('setPosition', position)
   }
 }

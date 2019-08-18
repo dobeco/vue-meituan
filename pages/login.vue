@@ -61,6 +61,9 @@ export default {
         }else{
           self.error=`服务器出错`
         }
+        setTimeout(function () {
+              self.error = ''
+            }, 1500)
       })
     }
   }
